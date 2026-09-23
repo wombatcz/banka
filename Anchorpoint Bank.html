@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Anchorpoint</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff; --bg-2:#f5f5f7; --bg-3:#000000;
+    --ink:#1d1d1f; --ink-soft:#6e6e73; --ink-on-dark:#f5f5f7; --ink-soft-dark:#a1a1a6;
+    --line:rgba(0,0,0,0.08); --blue:#0068d6; --glass:rgba(255,255,255,0.72);
+    font-family:'Inter', -apple-system, system-ui, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-padding-top:60px; scroll-behavior:smooth;}
+  body{margin:0; background:var(--bg); color:var(--ink); padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px); -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1100px; margin:0 auto; padding:0 24px;}
+  a{color:inherit; text-decoration:none;}
+  @media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
+
+  header{position:fixed; top:env(safe-area-inset-top,0px); left:0; right:0; z-index:50; background:var(--glass); backdrop-filter:blur(20px) saturate(180%); border-bottom:1px solid var(--line);}
+  nav{display:flex; align-items:center; justify-content:space-between; padding:14px 24px; max-width:1100px; margin:0 auto;}
+  .mark{font-weight:600; font-size:1.05rem; letter-spacing:-0.01em; display:flex; align-items:center; gap:8px;}
+  .navlinks{display:flex; gap:34px; font-size:0.86rem; color:var(--ink-soft); font-weight:500;}
+  .navlinks a:hover{color:var(--ink);}
+  .navcta{display:flex; gap:18px; align-items:center; font-size:0.86rem; font-weight:500;}
+  .pill{background:var(--blue); color:#fff; padding:8px 18px; border-radius:980px; font-size:0.82rem;}
+  @media (max-width:760px){ .navlinks{display:none;} }
+
+  section{position:relative;}
+  .hero{min-height:92vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:140px 24px 80px; background:var(--bg);}
+  .hero .eyebrow{font-size:1rem; color:var(--ink-soft); font-weight:500; margin-bottom:12px;}
+  .hero h1{font-size:clamp(2.6rem,7vw,5.2rem); font-weight:600; letter-spacing:-0.03em; line-height:1.02; margin:0 0 20px;}
+  .hero h1 .thin{font-weight:300;}
+  .hero p{font-size:clamp(1.1rem,2vw,1.4rem); color:var(--ink-soft); max-width:32ch; margin:0 0 34px; font-weight:400;}
+  .hero-actions{display:flex; gap:22px; font-size:1.15rem;}
+  .hero-actions .go{color:var(--blue); font-weight:500;}
+  .hero-actions .go:hover{text-decoration:underline;}
+
+  .reveal{opacity:0; transform:translateY(48px); transition:opacity 0.9s cubic-bezier(.19,1,.22,1), transform 0.9s cubic-bezier(.19,1,.22,1);}
+  .reveal.in{opacity:1; transform:translateY(0);}
+  .reveal-l{opacity:0; transform:translateX(-56px); transition:opacity 0.9s cubic-bezier(.19,1,.22,1), transform 0.9s cubic-bezier(.19,1,.22,1);}
+  .reveal-l.in{opacity:1; transform:translateX(0);}
+  .reveal-r{opacity:0; transform:translateX(56px); transition:opacity 0.9s cubic-bezier(.19,1,.22,1), transform 0.9s cubic-bezier(.19,1,.22,1);}
+  .reveal-r.in{opacity:1; transform:translateX(0);}
+  .reveal-scale{opacity:0; transform:scale(0.92); transition:opacity 1s cubic-bezier(.19,1,.22,1), transform 1s cubic-bezier(.19,1,.22,1);}
+  .reveal-scale.in{opacity:1; transform:scale(1);}
+
+  .feature{padding:150px 24px; text-align:center;}
+  .feature.dark{background:var(--bg-3); color:var(--ink-on-dark);}
+  .feature.gray{background:var(--bg-2);}
+  .feature h2{font-size:clamp(2rem,4.4vw,3.4rem); font-weight:600; letter-spacing:-0.02em; margin:0 0 16px; line-height:1.06;}
+  .feature p.sub{font-size:clamp(1.05rem,1.6vw,1.25rem); color:var(--ink-soft); max-width:38ch; margin:0 auto 56px;}
+  .feature.dark p.sub{color:var(--ink-soft-dark);}
+
+  .card-row{display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--line); border-radius:22px; overflow:hidden; max-width:1000px; margin:0 auto;}
+  .feature.dark .card-row{background:rgba(255,255,255,0.1);}
+  .card{background:var(--bg); padding:44px 32px; text-align:left;}
+  .feature.dark .card{background:#0a0a0a;}
+  .card .rate{font-size:2.6rem; font-weight:600; letter-spacing:-0.02em; margin:18px 0 8px;}
+  .card .rate span{font-size:1.1rem; font-weight:400; color:var(--ink-soft);}
+  .card h3{font-size:1.15rem; font-weight:600; margin:0 0 6px;}
+  .card p{font-size:0.92rem; color:var(--ink-soft); line-height:1.5; margin:0;}
+  .feature.dark .card p{color:var(--ink-soft-dark);}
+  @media (max-width:760px){ .card-row{grid-template-columns:1fr;} }
+
+  .split{display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; max-width:1000px; margin:0 auto; text-align:left;}
+  .split h2{font-size:clamp(2rem,3.6vw,2.8rem);}
+  @media (max-width:820px){ .split{grid-template-columns:1fr; text-align:center;} .split > div{text-align:center;} }
+
+  .phone{width:230px; height:470px; border-radius:34px; background:linear-gradient(145deg,#e8e8ed,#c9c9ce); padding:8px; margin:0 auto; box-shadow:0 30px 60px -20px rgba(0,0,0,0.25);}
+  .phone-screen{width:100%; height:100%; border-radius:26px; background:#000; display:flex; flex-direction:column; padding:30px 20px; gap:16px; color:#fff;}
+  .phone-bal{font-size:2rem; font-weight:600; letter-spacing:-0.02em;}
+  .phone-line{height:9px; border-radius:5px; background:rgba(255,255,255,0.16);}
+  .w40{width:40%;} .w65{width:65%;} .w80{width:80%;}
+  .phone-card{margin-top:auto; height:70px; border-radius:14px; background:linear-gradient(135deg,#0068d6,#00c2ff);}
+
+  .trust-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:36px; max-width:1000px; margin:0 auto; text-align:center;}
+  .trust-item h4{font-size:1rem; font-weight:600; margin:14px 0 6px;}
+  .trust-item p{font-size:0.86rem; color:var(--ink-soft); line-height:1.5; margin:0;}
+  .icon-circle{width:52px; height:52px; border-radius:50%; background:var(--bg-2); display:flex; align-items:center; justify-content:center; margin:0 auto;}
+  @media (max-width:820px){ .trust-grid{grid-template-columns:1fr 1fr;} }
+
+  .quote-section{padding:170px 24px; text-align:center; background:var(--bg);}
+  .quote{font-size:clamp(1.7rem,3.6vw,2.7rem); font-weight:500; letter-spacing:-0.02em; max-width:26ch; margin:0 auto 22px; line-height:1.25;}
+  .quote-attr{color:var(--ink-soft); font-size:1rem;}
+
+  footer{background:var(--bg-2); padding:56px 24px 32px; font-size:0.82rem; color:var(--ink-soft);}
+  .foot-grid{display:grid; grid-template-columns:1.3fr repeat(3,1fr); gap:34px; max-width:1100px; margin:0 auto 32px;}
+  .foot-col h5{color:var(--ink); font-size:0.82rem; font-weight:600; margin:0 0 14px;}
+  .foot-col ul{list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:9px;}
+  .foot-col a:hover{color:var(--ink); text-decoration:underline;}
+  .foot-legal{max-width:1100px; margin:0 auto; border-top:1px solid var(--line); padding-top:22px; line-height:1.6;}
+  .foot-bottom{display:flex; justify-content:space-between; margin-top:14px; flex-wrap:wrap; gap:8px;}
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="mark">
+      <svg width="18" height="18" viewBox="0 0 22 22" fill="none"><path d="M11 1L20 6V9H2V6L11 1Z" fill="currentColor"/><rect x="4" y="10" width="3" height="8" fill="currentColor"/><rect x="9.5" y="10" width="3" height="8" fill="currentColor"/><rect x="15" y="10" width="3" height="8" fill="currentColor"/><rect x="2" y="19" width="18" height="2" fill="currentColor"/></svg>
+      Anchorpoint
+    </div>
+    <div class="navlinks">
+      <a href="#accounts">Accounts</a>
+      <a href="#security">Security</a>
+      <a href="#app">App</a>
+      <a href="#support">Support</a>
+    </div>
+    <div class="navcta">
+      <a href="#login">Log in</a>
+      <a class="pill" href="#open">Open an account</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <p class="eyebrow reveal">Anchorpoint</p>
+  <h1 class="reveal"><span class="thin">Banking,</span><br>held to a higher standard.</h1>
+  <p class="reveal">No hidden fees. No fine print you need a lawyer for. Just your money, always where you left it.</p>
+  <div class="hero-actions reveal">
+    <a class="pill" href="#open">Open an account</a>
+    <a class="go" href="#accounts">Compare accounts &rsaquo;</a>
+  </div>
+</section>
+
+<section class="feature" id="accounts">
+  <h2 class="reveal">Three accounts. That's all you need.</h2>
+  <p class="sub reveal">Everyday spending, steady growth, and money you won't touch — each with its own simple deal.</p>
+  <div class="card-row">
+    <div class="card reveal-l">
+      <h3>Everyday Checking</h3>
+      <div class="rate">$0<span> /month</span></div>
+      <p>No minimum balance. No fee, ever, for keeping your money here.</p>
+    </div>
+    <div class="card reveal">
+      <h3>Anchor Savings</h3>
+      <div class="rate">4.10<span>% APY</span></div>
+      <p>A public rate that doesn't move without 30 days' notice.</p>
+    </div>
+    <div class="card reveal-r">
+      <h3>12-Month CD</h3>
+      <div class="rate">4.65<span>% APY</span></div>
+      <p>Lock it in. The rate you open with is the rate you keep.</p>
+    </div>
+  </div>
+</section>
+
+<section class="feature dark" id="security">
+  <h2 class="reveal">Built to protect, not just to store.</h2>
+  <p class="sub reveal">Every layer of security here exists because something specific could go wrong without it.</p>
+  <div class="trust-grid">
+    <div class="trust-item reveal">
+      <div class="icon-circle"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 1L18 4.5V9C18 14 14.5 17.7 10 19C5.5 17.7 2 14 2 9V4.5L10 1Z" stroke="#1d1d1f" stroke-width="1.4"/></svg></div>
+      <h4>FDIC insured</h4>
+      <p>Up to $250,000 per depositor.</p>
+    </div>
+    <div class="trust-item reveal">
+      <div class="icon-circle"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="4" y="9" width="12" height="8" rx="1.5" stroke="#1d1d1f" stroke-width="1.4"/><path d="M6.5 9V6a3.5 3.5 0 0 1 7 0v3" stroke="#1d1d1f" stroke-width="1.4"/></svg></div>
+      <h4>End-to-end encryption</h4>
+      <p>Every login, every transfer.</p>
+    </div>
+    <div class="trust-item reveal">
+      <div class="icon-circle"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#1d1d1f" stroke-width="1.4"/><path d="M6.5 10.3l2.3 2.3 4.7-5" stroke="#1d1d1f" stroke-width="1.4" fill="none"/></svg></div>
+      <h4>Live fraud monitoring</h4>
+      <p>A person calls, not a bot.</p>
+    </div>
+    <div class="trust-item reveal">
+      <div class="icon-circle"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2v16M2 10h16" stroke="#1d1d1f" stroke-width="1.4"/><circle cx="10" cy="10" r="8" stroke="#1d1d1f" stroke-width="1.4"/></svg></div>
+      <h4>Zero liability</h4>
+      <p>Unauthorized charges are never yours.</p>
+    </div>
+  </div>
+</section>
+
+<section class="feature gray" id="app">
+  <div class="split">
+    <div class="reveal-l">
+      <h2>Your whole balance, at a glance.</h2>
+      <p class="sub" style="margin:0 0 28px;">Move money, deposit checks, and freeze a lost card before you've finished looking for it.</p>
+      <a class="pill" href="#">Get the app</a>
+    </div>
+    <div class="reveal-scale">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="phone-line w40" style="opacity:0.5;"></div>
+          <div class="phone-bal">$4,218.60</div>
+          <div class="phone-line w65"></div>
+          <div class="phone-line w80"></div>
+          <div class="phone-card"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="quote-section">
+  <p class="quote reveal">"I called about a fee once. A person answered, reversed it, and explained why it happened."</p>
+  <p class="quote-attr reveal">Dana R. — member since 2019</p>
+</section>
+
+<footer id="support">
+  <div class="foot-grid">
+    <div class="foot-col">
+      <div class="mark" style="margin-bottom:12px; color:var(--ink);">Anchorpoint</div>
+      <p style="max-width:24ch;">A federally insured bank, built for people who read their statements.</p>
+    </div>
+    <div class="foot-col">
+      <h5>Banking</h5>
+      <ul><li><a href="#">Checking</a></li><li><a href="#">Savings</a></li><li><a href="#">CDs</a></li><li><a href="#">Business</a></li></ul>
+    </div>
+    <div class="foot-col">
+      <h5>Support</h5>
+      <ul><li><a href="#">Help center</a></li><li><a href="#">Branch locator</a></li><li><a href="#">Contact</a></li><li><a href="#">Report fraud</a></li></ul>
+    </div>
+    <div class="foot-col">
+      <h5>Company</h5>
+      <ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">Legal</a></li></ul>
+    </div>
+  </div>
+  <div class="foot-legal">
+    <p>Anchorpoint Bank is a fictional institution created for demonstration purposes. Member FDIC. Equal Housing Lender. Deposits insured up to $250,000 per depositor, per ownership category. Routing number 000000000.</p>
+    <div class="foot-bottom">
+      <span>© 2026 Anchorpoint Bank.</span>
+      <span>Privacy · Terms of deposit · Accessibility</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+try{
+  var els = document.querySelectorAll('.reveal, .reveal-l, .reveal-r, .reveal-scale');
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.18, rootMargin:'0px 0px -8% 0px'});
+  els.forEach(function(el){ io.observe(el); });
+}catch(err){ document.querySelectorAll('.reveal, .reveal-l, .reveal-r, .reveal-scale').forEach(function(el){ el.classList.add('in'); }); }
+</script>
+
+</body>
+</html>
