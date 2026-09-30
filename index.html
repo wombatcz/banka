@@ -8,9 +8,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#ffffff; --bg-2:#f5f5f7; --bg-3:#000000;
-    --ink:#1d1d1f; --ink-soft:#6e6e73; --ink-on-dark:#f5f5f7; --ink-soft-dark:#a1a1a6;
-    --line:rgba(0,0,0,0.08); --blue:#0068d6; --glass:rgba(255,255,255,0.72);
+    --bg:#ffffff; --bg-2:#faf1de; --bg-3:#0d0d0d;
+    --ink:#0d0d0d; --ink-soft:#57534b; --ink-on-dark:#ffffff; --ink-soft-dark:#c7beac;
+    --line:rgba(13,13,13,0.12); --accent:#253b59; --accent-soft:#a66b49; --glass:rgba(255,255,255,0.74);
+    --cream:#f2d091; --tan:#bf8756; --rust:#a66b49;
     font-family:'Inter', -apple-system, system-ui, sans-serif;
   }
   *{box-sizing:border-box;}
@@ -26,7 +27,8 @@
   .navlinks{display:flex; gap:34px; font-size:0.86rem; color:var(--ink-soft); font-weight:500;}
   .navlinks a:hover{color:var(--ink);}
   .navcta{display:flex; gap:18px; align-items:center; font-size:0.86rem; font-weight:500;}
-  .pill{background:var(--blue); color:#fff; padding:8px 18px; border-radius:980px; font-size:0.82rem;}
+  .pill{background:var(--accent); color:var(--bg); padding:8px 18px; border-radius:980px; font-size:0.82rem; transition:background 0.25s ease;}
+  .pill:hover{background:var(--accent-soft);}
   @media (max-width:760px){ .navlinks{display:none;} }
 
   section{position:relative;}
@@ -36,7 +38,7 @@
   .hero h1 .thin{font-weight:300;}
   .hero p{font-size:clamp(1.1rem,2vw,1.4rem); color:var(--ink-soft); max-width:32ch; margin:0 0 34px; font-weight:400;}
   .hero-actions{display:flex; gap:22px; font-size:1.15rem;}
-  .hero-actions .go{color:var(--blue); font-weight:500;}
+  .hero-actions .go{color:var(--accent); font-weight:500;}
   .hero-actions .go:hover{text-decoration:underline;}
 
   .reveal{opacity:0; transform:translateY(48px); transition:opacity 0.9s cubic-bezier(.19,1,.22,1), transform 0.9s cubic-bezier(.19,1,.22,1);}
@@ -58,8 +60,8 @@
   .card-row{display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--line); border-radius:22px; overflow:hidden; max-width:1000px; margin:0 auto;}
   .feature.dark .card-row{background:rgba(255,255,255,0.1);}
   .card{background:var(--bg); padding:44px 32px; text-align:left;}
-  .feature.dark .card{background:#0a0a0a;}
-  .card .rate{font-size:2.6rem; font-weight:600; letter-spacing:-0.02em; margin:18px 0 8px;}
+  .feature.dark .card{background:#242424;}
+  .card .rate{font-size:2.6rem; font-weight:600; letter-spacing:-0.02em; margin:18px 0 8px; color:var(--rust);}
   .card .rate span{font-size:1.1rem; font-weight:400; color:var(--ink-soft);}
   .card h3{font-size:1.15rem; font-weight:600; margin:0 0 6px;}
   .card p{font-size:0.92rem; color:var(--ink-soft); line-height:1.5; margin:0;}
@@ -70,12 +72,29 @@
   .split h2{font-size:clamp(2rem,3.6vw,2.8rem);}
   @media (max-width:820px){ .split{grid-template-columns:1fr; text-align:center;} .split > div{text-align:center;} }
 
-  .phone{width:230px; height:470px; border-radius:34px; background:linear-gradient(145deg,#e8e8ed,#c9c9ce); padding:8px; margin:0 auto; box-shadow:0 30px 60px -20px rgba(0,0,0,0.25);}
-  .phone-screen{width:100%; height:100%; border-radius:26px; background:#000; display:flex; flex-direction:column; padding:30px 20px; gap:16px; color:#fff;}
-  .phone-bal{font-size:2rem; font-weight:600; letter-spacing:-0.02em;}
-  .phone-line{height:9px; border-radius:5px; background:rgba(255,255,255,0.16);}
+  .phone{width:250px; height:510px; border-radius:36px; background:linear-gradient(145deg,#3a4a63,#1c2637); padding:8px; margin:0 auto; box-shadow:0 30px 60px -20px rgba(13,13,13,0.35);}
+  .phone-screen{width:100%; height:100%; border-radius:28px; background:#161616; display:flex; flex-direction:column; padding:26px 18px 20px; gap:14px; color:#fff; overflow:hidden; position:relative;}
+  .phone-topbar{display:flex; align-items:center; justify-content:space-between; font-size:0.68rem; color:#8a8a8a; letter-spacing:0.02em;}
+  .live-dot{width:6px; height:6px; border-radius:50%; background:var(--cream); display:inline-block; margin-right:5px; animation:pulseDot 1.8s ease-in-out infinite;}
+  @keyframes pulseDot{0%,100%{opacity:1; transform:scale(1);} 50%{opacity:0.35; transform:scale(0.7);}}
+  .phone-bal{font-size:1.9rem; font-weight:600; letter-spacing:-0.02em;}
+  .phone-bal .delta{display:block; font-size:0.72rem; font-weight:500; color:var(--cream); margin-top:4px;}
+  .chart-row{display:flex; align-items:flex-end; gap:5px; height:44px; margin:4px 0 2px;}
+  .chart-bar{flex:1; background:linear-gradient(180deg,var(--cream),var(--rust)); border-radius:3px 3px 1px 1px; animation:barPulse 2.4s ease-in-out infinite;}
+  @keyframes barPulse{0%,100%{transform:scaleY(1);} 50%{transform:scaleY(0.72);}}
+  .phone-line{height:8px; border-radius:5px; background:rgba(255,255,255,0.14);}
   .w40{width:40%;} .w65{width:65%;} .w80{width:80%;}
-  .phone-card{margin-top:auto; height:70px; border-radius:14px; background:linear-gradient(135deg,#0068d6,#00c2ff);}
+  .tx-list{display:flex; flex-direction:column; gap:10px; margin-top:2px;}
+  .tx-row{display:flex; align-items:center; gap:10px; font-size:0.72rem;}
+  .tx-icon{width:26px; height:26px; border-radius:50%; background:rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center; flex:none;}
+  .tx-name{flex:1; color:#e4e4e4;}
+  .tx-amt{color:#c3c3c3; font-weight:500;}
+  .phone-card{margin-top:auto; height:76px; border-radius:14px; background:linear-gradient(135deg,var(--accent),var(--rust)); position:relative; overflow:hidden; padding:12px 14px; display:flex; flex-direction:column; justify-content:space-between;}
+  .phone-card .chip{width:20px; height:14px; border-radius:3px; background:rgba(255,255,255,0.4);}
+  .phone-card .tap{position:absolute; right:10px; top:10px; width:22px; height:22px; border:1.5px solid rgba(255,255,255,0.5); border-radius:50%;}
+  .phone-card .tap::before{content:''; position:absolute; inset:-7px; border:1.5px solid rgba(255,255,255,0.28); border-radius:50%; animation:tapWave 2.2s ease-out infinite;}
+  @keyframes tapWave{0%{transform:scale(0.6); opacity:0.9;} 100%{transform:scale(1.25); opacity:0;}}
+  .phone-card .num{font-size:0.72rem; color:#e4e4e4; letter-spacing:0.06em;}
 
   .trust-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:36px; max-width:1000px; margin:0 auto; text-align:center;}
   .trust-item h4{font-size:1rem; font-weight:600; margin:14px 0 6px;}
@@ -154,22 +173,22 @@
   <p class="sub reveal">Every layer of security here exists because something specific could go wrong without it.</p>
   <div class="trust-grid">
     <div class="trust-item reveal">
-      <div class="icon-circle"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 1L18 4.5V9C18 14 14.5 17.7 10 19C5.5 17.7 2 14 2 9V4.5L10 1Z" stroke="#1d1d1f" stroke-width="1.4"/></svg></div>
+      <div class="icon-circle"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 1L18 4.5V9C18 14 14.5 17.7 10 19C5.5 17.7 2 14 2 9V4.5L10 1Z" stroke="#253b59" stroke-width="1.4"/></svg></div>
       <h4>FDIC insured</h4>
       <p>Up to $250,000 per depositor.</p>
     </div>
     <div class="trust-item reveal">
-      <div class="icon-circle"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="4" y="9" width="12" height="8" rx="1.5" stroke="#1d1d1f" stroke-width="1.4"/><path d="M6.5 9V6a3.5 3.5 0 0 1 7 0v3" stroke="#1d1d1f" stroke-width="1.4"/></svg></div>
+      <div class="icon-circle"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="4" y="9" width="12" height="8" rx="1.5" stroke="#253b59" stroke-width="1.4"/><path d="M6.5 9V6a3.5 3.5 0 0 1 7 0v3" stroke="#253b59" stroke-width="1.4"/></svg></div>
       <h4>End-to-end encryption</h4>
       <p>Every login, every transfer.</p>
     </div>
     <div class="trust-item reveal">
-      <div class="icon-circle"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#1d1d1f" stroke-width="1.4"/><path d="M6.5 10.3l2.3 2.3 4.7-5" stroke="#1d1d1f" stroke-width="1.4" fill="none"/></svg></div>
+      <div class="icon-circle"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#253b59" stroke-width="1.4"/><path d="M6.5 10.3l2.3 2.3 4.7-5" stroke="#253b59" stroke-width="1.4" fill="none"/></svg></div>
       <h4>Live fraud monitoring</h4>
       <p>A person calls, not a bot.</p>
     </div>
     <div class="trust-item reveal">
-      <div class="icon-circle"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2v16M2 10h16" stroke="#1d1d1f" stroke-width="1.4"/><circle cx="10" cy="10" r="8" stroke="#1d1d1f" stroke-width="1.4"/></svg></div>
+      <div class="icon-circle"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2v16M2 10h16" stroke="#253b59" stroke-width="1.4"/><circle cx="10" cy="10" r="8" stroke="#253b59" stroke-width="1.4"/></svg></div>
       <h4>Zero liability</h4>
       <p>Unauthorized charges are never yours.</p>
     </div>
@@ -186,11 +205,27 @@
     <div class="reveal-scale">
       <div class="phone">
         <div class="phone-screen">
-          <div class="phone-line w40" style="opacity:0.5;"></div>
-          <div class="phone-bal">$4,218.60</div>
-          <div class="phone-line w65"></div>
-          <div class="phone-line w80"></div>
-          <div class="phone-card"></div>
+          <div class="phone-topbar"><span><span class="live-dot"></span>Live balance</span><span>9:41</span></div>
+          <div class="phone-bal">$4,218.60<span class="delta">+ $312.40 this week</span></div>
+          <div class="chart-row">
+            <div class="chart-bar" style="height:60%; animation-delay:0s;"></div>
+            <div class="chart-bar" style="height:80%; animation-delay:0.2s;"></div>
+            <div class="chart-bar" style="height:45%; animation-delay:0.4s;"></div>
+            <div class="chart-bar" style="height:95%; animation-delay:0.1s;"></div>
+            <div class="chart-bar" style="height:65%; animation-delay:0.3s;"></div>
+            <div class="chart-bar" style="height:85%; animation-delay:0.5s;"></div>
+            <div class="chart-bar" style="height:55%; animation-delay:0.15s;"></div>
+          </div>
+          <div class="tx-list">
+            <div class="tx-row"><div class="tx-icon">☕</div><div class="tx-name">Corner Coffee</div><div class="tx-amt">-$4.50</div></div>
+            <div class="tx-row"><div class="tx-icon">💳</div><div class="tx-name">Paycheck deposit</div><div class="tx-amt">+$2,140.00</div></div>
+            <div class="tx-row"><div class="tx-icon">🏠</div><div class="tx-name">Rent transfer</div><div class="tx-amt">-$1,450.00</div></div>
+          </div>
+          <div class="phone-card">
+            <div class="tap"></div>
+            <div class="chip"></div>
+            <div class="num">•••• 4471</div>
+          </div>
         </div>
       </div>
     </div>
@@ -235,7 +270,8 @@ try{
   var els = document.querySelectorAll('.reveal, .reveal-l, .reveal-r, .reveal-scale');
   var io = new IntersectionObserver(function(entries){
     entries.forEach(function(e){
-      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      if(e.isIntersecting){ e.target.classList.add('in'); }
+      else{ e.target.classList.remove('in'); }
     });
   }, {threshold:0.18, rootMargin:'0px 0px -8% 0px'});
   els.forEach(function(el){ io.observe(el); });
