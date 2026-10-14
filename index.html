@@ -55,7 +55,7 @@
   .feature.gray{background:var(--bg-2);}
   .feature h2{font-size:clamp(2rem,4.4vw,3.4rem); font-weight:600; letter-spacing:-0.02em; margin:0 0 16px; line-height:1.06;}
   .feature p.sub{font-size:clamp(1.05rem,1.6vw,1.25rem); color:var(--ink-soft); max-width:38ch; margin:0 auto 56px;}
-  .feature.dark p.sub{color:var(--ink-on-dark);}
+  .feature.dark p.sub{color:var(--ink-soft-dark);}
 
   .card-row{display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--line); border-radius:22px; overflow:hidden; max-width:1000px; margin:0 auto;}
   .feature.dark .card-row{background:rgba(255,255,255,0.1);}
@@ -99,6 +99,7 @@
   .trust-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:36px; max-width:1000px; margin:0 auto; text-align:center;}
   .trust-item h4{font-size:1rem; font-weight:600; margin:14px 0 6px;}
   .trust-item p{font-size:0.86rem; color:var(--ink-soft); line-height:1.5; margin:0;}
+  .feature.dark .trust-item p{color:#e6dcc6;}
   .icon-circle{width:52px; height:52px; border-radius:50%; background:var(--bg-2); display:flex; align-items:center; justify-content:center; margin:0 auto;}
   @media (max-width:820px){ .trust-grid{grid-template-columns:1fr 1fr;} }
 
@@ -173,7 +174,7 @@
   <p class="sub reveal">Every layer of security here exists because something specific could go wrong without it.</p>
   <div class="trust-grid">
     <div class="trust-item reveal">
-      <div class="icon-circle"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 1L18 4.5V9C18 14 14.5 17.7 10 19C5.5 17.7 2 14 2 9V4.5L10 1Z" stroke="#ffffffffff" stroke-width="1.4"/></svg></div>
+      <div class="icon-circle"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 1L18 4.5V9C18 14 14.5 17.7 10 19C5.5 17.7 2 14 2 9V4.5L10 1Z" stroke="#253b59" stroke-width="1.4"/></svg></div>
       <h4>FDIC insured</h4>
       <p>Up to $250,000 per depositor.</p>
     </div>
